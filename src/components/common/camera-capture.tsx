@@ -64,7 +64,7 @@ export const CameraCapture: React.FC = () => {
         <video
           ref={videoRef}
           width="100%"
-          height="300"
+          height="200"
           style={{ display: isCameraOn ? "block" : "none" }}
         />
         <canvas

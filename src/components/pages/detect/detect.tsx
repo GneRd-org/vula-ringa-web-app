@@ -1,4 +1,5 @@
 import { CameraCapture } from "../../common";
+import WebcamComponent from "../../common/web-cam";
 
 export const Detect = () => {
   return (
@@ -17,7 +18,7 @@ export const Detect = () => {
           </section>
         </section>
       </section>
-      <CameraCapture />
+      <WebcamComponent />
     </section>
   );
 };
