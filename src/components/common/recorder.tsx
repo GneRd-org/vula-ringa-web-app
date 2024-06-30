@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FaStopCircle } from "react-icons/fa";
 import { IoMicCircle } from "react-icons/io5";
-import { motion } from "framer-motion";
 import { SoundWave } from "./sound-wave";
 
 export const VoiceRecorder: React.FC = () => {
