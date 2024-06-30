@@ -12,7 +12,9 @@
   "dependencies": {
     "@headlessui/react": "^2.1.1",
     "@supabase/supabase-js": "^2.39.8",
+    "@tanstack/react-query": "^5.49.0",
     "@trendyol-js/react-carousel": "^3.0.2",
+    "axios": "^1.7.2",
     "env-cmd": "^10.1.0",
     "framer-motion": "^11.2.12",
     "lodash": "^4.17.21",

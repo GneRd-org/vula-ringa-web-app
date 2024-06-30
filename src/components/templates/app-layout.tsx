@@ -9,7 +9,9 @@ export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
   const notHome = currentRoute !== "/";
   return (
     <main className="flex flex-col">
-      <section className="lg:px-16 w-full bg-gray-100">{children}</section>
+      <section className="lg:px-16 w-full bg-gray-100 h-screen">
+        {children}
+      </section>
       {(showNav || notHome) && <Footer />}
     </main>
   );
