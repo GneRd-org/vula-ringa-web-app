@@ -2,18 +2,25 @@ import { Tabs } from "../../common/tabs";
 import { useState } from "react";
 import { translateText } from "../../../services";
 import { LangStore, useLangStore } from "../../../store";
+import { isEmpty } from "lodash";
+import { Typewriter } from "../../common";
+import { FaRegCopy } from "react-icons/fa6";
+import { CiShare2 } from "react-icons/ci";
 
 export const Translate = () => {
   const [translatedText, setTranslatedText] = useState("");
   const { fromLang, toLang } = useLangStore() as LangStore;
+  const [copied, setCopied] = useState(false);
 
   const handleTranslate = () => {
     const text = document.querySelector("textarea")?.value;
     if (!text) return;
 
-    translateText(text, fromLang || "en", toLang || "en").then((result) => {
-      console.log(result);
-    });
+    translateText(text, fromLang || "en", toLang || "en").then(
+      ({ translation }) => {
+        setTranslatedText(translation);
+      }
+    );
   };
 
   return (
@@ -38,7 +45,7 @@ export const Translate = () => {
         tabs={[
           {
             title: "Text",
-            content: (
+            content: isEmpty(translatedText) ? (
               <section>
                 <section className="flex items-center justify-center">
                   <section className="w-5/6 flex justify-center flex-col">
@@ -54,6 +61,33 @@ export const Translate = () => {
                       Translate
                     </button>
                   </section>
+                </section>
+              </section>
+            ) : (
+              <section className="flex items-center flex-col justify-center w-full">
+                <Typewriter
+                  text={translatedText}
+                  className="w-5/6 px-3 py-2 rounded-lg bg-slate-200 border-b-2 border-primary"
+                  cols={6}
+                />
+                <section className="flex gap-3 py-2">
+                  <CiShare2
+                    className="text-primary text-lg cursor-pointer"
+                    onClick={() => {
+                      navigator.clipboard.writeText(translatedText);
+                    }}
+                  />
+
+                  <FaRegCopy
+                    className="text-primary text-lg cursor-pointer"
+                    onClick={() => {
+                      navigator.clipboard.writeText(translatedText);
+                      setCopied(true);
+                    }}
+                  />
+                  {copied && (
+                    <p className="text-primary text-xs">Copied to clipboard</p>
+                  )}
                 </section>
               </section>
             ),

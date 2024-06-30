@@ -8,3 +8,4 @@ export * from "./toggle";
 export * from "./dropdown";
 export * from "./recorder";
 export * from "./sound-wave";
+export * from "./typewriter";
