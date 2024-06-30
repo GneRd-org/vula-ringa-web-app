@@ -23,7 +23,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
 
       setCurrentText((prev) => prev + text[index]);
       setIndex((prev) => prev + 1);
-    }, 200);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [index, text]);

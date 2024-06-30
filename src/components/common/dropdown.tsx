@@ -16,7 +16,7 @@ const languages = [
   { id: 3, name: "English" },
   { id: 4, name: "Swahili" },
   { id: 5, name: "Xhosa" },
-  { id: 6, name: "Zulu" },
+  { id: 6, name: "iSizulu" },
   { id: 7, name: "Tswana" },
   { id: 8, name: "Northern Sotho" },
   { id: 9, name: "Afrikaans" },

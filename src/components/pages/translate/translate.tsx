@@ -1,5 +1,5 @@
 import { Tabs } from "../../common/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { translateText } from "../../../services";
 import { LangStore, useLangStore } from "../../../store";
 import { isEmpty } from "lodash";
@@ -22,6 +22,10 @@ export const Translate = () => {
       }
     );
   };
+
+  useEffect(() => {
+    setTranslatedText("");
+  }, []);
 
   return (
     <section className="h-screen w-full flex flex-col gap-6">
@@ -94,7 +98,7 @@ export const Translate = () => {
           },
           {
             title: "Audio",
-            content: <VoiceRecorder />,
+            content: <VoiceRecorder transcribe={false} />,
           },
         ]}
       />

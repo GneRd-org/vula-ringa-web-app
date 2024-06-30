@@ -18,7 +18,7 @@ export const Transcribe = () => {
           </section>
         </section>
       </section>
-      <VoiceRecorder />
+      <VoiceRecorder transcribe />
     </section>
   );
 };

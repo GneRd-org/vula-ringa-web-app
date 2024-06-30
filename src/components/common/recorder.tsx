@@ -3,7 +3,11 @@ import { FaStopCircle } from "react-icons/fa";
 import { IoMicCircle } from "react-icons/io5";
 import { SoundWave } from "./sound-wave";
 
-export const VoiceRecorder: React.FC = () => {
+export interface VoiceRecorderProps {
+  transcribe: boolean;
+}
+
+export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ transcribe }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [base64String, setBase64String] = useState<string | null>(null);
@@ -68,6 +72,15 @@ export const VoiceRecorder: React.FC = () => {
           <h2>Your Audio</h2>
           <audio src={audioUrl} controls />
         </div>
+      )}
+      {transcribe ? (
+        <button className="bg-primary text-white rounded-lg px-5 py-2 mt-5">
+          Transcribe
+        </button>
+      ) : (
+        <button className="bg-primary text-white rounded-lg px-5 py-2 mt-5">
+          Translate
+        </button>
       )}
     </div>
   );

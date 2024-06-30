@@ -8,7 +8,7 @@ const mapLang = (lang: string) => {
     "southern sotho": "sot_Latn",
     swati: "ssw_Latn",
     tsonga: "tso_Latn",
-    Tswana: "tsn_Latn",
+    tswana: "tsn_Latn",
     xhosa: "xho_Latn",
     isizulu: "zul_Latn",
     english: "eng_Latn",
