@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
 import Tesseract from "tesseract.js";
+import { FaCamera } from "react-icons/fa6";
+import { TbCaptureFilled } from "react-icons/tb";
+import { FiCameraOff } from "react-icons/fi";
 
 export const CameraCapture: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -57,36 +60,50 @@ export const CameraCapture: React.FC = () => {
 
   return (
     <div>
-      <h1>Camera Text Extractor</h1>
       <div>
         <video
           ref={videoRef}
-          width="400"
+          width="100%"
           height="300"
           style={{ display: isCameraOn ? "block" : "none" }}
         />
         <canvas
           ref={canvasRef}
-          width="400"
-          height="300"
+          width="100%"
+          height="200"
           style={{ display: "none" }}
         />
       </div>
-      <div>
-        <button onClick={startCamera} disabled={isCameraOn}>
-          Start Camera
+      <div className="flex justify-center items-center border-2 rounded-lg mx-4">
+        <button
+          className="flex gap-2 items-center font-semibold text-xs"
+          onClick={startCamera}
+          disabled={isCameraOn}
+        >
+          <FaCamera className="text-lightPurple text-lg" /> Open
         </button>
-        <button onClick={captureImage} disabled={!isCameraOn}>
-          Capture Image
+        <span className="px-2">{" | "}</span>
+        <button
+          className="flex gap-2 items-center font-semibold text-xs"
+          onClick={captureImage}
+          disabled={!isCameraOn}
+        >
+          <TbCaptureFilled className="bg-lightPurple" />
+          Capture
         </button>
-        <button onClick={stopCamera} disabled={!isCameraOn}>
-          Stop Camera
+        <span className="px-2">{" | "}</span>
+        <button
+          className="flex gap-2 items-center font-semibold text-xs"
+          onClick={stopCamera}
+          disabled={!isCameraOn}
+        >
+          <FiCameraOff className="bg-lightPurple" /> Camera
         </button>
       </div>
       {extractedText && (
-        <div>
-          <h2>Extracted Text</h2>
-          <p>{extractedText}</p>
+        <div className="flex justify-center gap-3 items-center">
+          <h2 className="font-semibold">Extracted Text:</h2>
+          <p className="border rounded-lg my-2 px-3 py-2">{extractedText}</p>
         </div>
       )}
     </div>
