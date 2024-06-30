@@ -1,4 +1,4 @@
-import { CameraCapture, VoiceRecorder } from "../../common";
+import { CameraCapture } from "../../common";
 
 export const Detect = () => {
   return (
