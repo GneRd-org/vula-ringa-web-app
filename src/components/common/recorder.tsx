@@ -47,7 +47,6 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   };
 
   useEffect(() => {
-    console.log(base64String);
     let amplitudeInterval: NodeJS.Timeout;
     if (isRecording) {
       amplitudeInterval = setInterval(() => {

@@ -156,12 +156,18 @@ export const CameraCapture: React.FC = () => {
             </h3>
             <section className="flex gap-3 items-center">
               <button
-                onClick={() => setFromLang(language ?? "")}
+                onClick={() => {
+                  setFromLang(language ?? "");
+                  window.location.href = "/config";
+                }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
               >
                 Yes
               </button>
-              <button className="bg-lightPurple text-white rounded-lg px-5 py-2">
+              <button
+                onClick={() => setIsCameraOn(false)}
+                className="bg-lightPurple text-white rounded-lg px-5 py-2"
+              >
                 No
               </button>
             </section>
