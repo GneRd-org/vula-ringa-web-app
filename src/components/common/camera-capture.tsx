@@ -118,23 +118,6 @@ export const CameraCapture: React.FC = () => {
         >
           <FiCameraOff className="bg-lightPurple" /> Camera
         </button>
-        <span className="px-2">{" | "}</span>
-        <button
-          className="flex gap-2 items-center font-semibold text-xs"
-          onClick={handleToggleCamera}
-        >
-          {facingMode === "user" ? (
-            <>
-              <FaCameraRotate className="bg-lightPurple" />
-              Rear Camera
-            </>
-          ) : (
-            <>
-              <FaCameraRotate className="bg-lightPurple" />
-              Front Camera
-            </>
-          )}
-        </button>
       </div>
       {extractedText && (
         <>
