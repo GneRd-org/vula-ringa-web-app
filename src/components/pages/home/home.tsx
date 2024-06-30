@@ -4,7 +4,7 @@ import { MdOutlineTranscribe } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { BsTranslate } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
-import useAppStore, { AppStore } from "../../../store/app-store";
+import { AppStore, useAppStore } from "../../../store/app-store";
 
 export const Home = () => {
   const { setShowNav } = useAppStore() as AppStore;

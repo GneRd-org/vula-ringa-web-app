@@ -5,9 +5,7 @@ export interface AppStore {
   setShowNav: (showNav: boolean) => void;
 }
 
-const useAppStore = create((set) => ({
+export const useAppStore = create((set) => ({
   showNav: false,
   setShowNav: (showNav: boolean) => set({ showNav }),
 }));
-
-export default useAppStore;

@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Footer } from "..";
-import useAppStore, { AppStore } from "../../store/app-store";
+import { AppStore, useAppStore } from "../../store/app-store";
 
 export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
   const { showNav } = useAppStore() as AppStore;

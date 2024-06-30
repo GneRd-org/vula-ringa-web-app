@@ -5,3 +5,4 @@ export * from "./card";
 export * from "./carousel";
 export * from "./footer";
 export * from "./toggle";
+export * from "./dropdown";
