@@ -21,6 +21,10 @@ export const CameraCapture: React.FC = () => {
     setLanguage(langCode);
   };
 
+  useEffect(() => {
+    extractedText && detectLanguage();
+  }, [extractedText]);
+
   const startCamera = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     if (videoRef.current) {
