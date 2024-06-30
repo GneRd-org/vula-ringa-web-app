@@ -17,8 +17,7 @@
     "axios": "^1.7.2",
     "env-cmd": "^10.1.0",
     "framer-motion": "^11.2.12",
-    "franc": "^6.2.0",
-    "langs": "^2.0.0",
+    "langdetect": "^0.2.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,6 +28,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@types/langdetect": "^0.2.2",
     "@types/lodash": "^4.17.6",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",

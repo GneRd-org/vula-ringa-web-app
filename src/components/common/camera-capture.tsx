@@ -5,7 +5,7 @@ import { TbCaptureFilled } from "react-icons/tb";
 import { FiCameraOff } from "react-icons/fi";
 import { AppStore, useAppStore } from "../../store";
 import { FaCameraRotate } from "react-icons/fa6";
-import { franc } from "franc";
+import { LanguageDetectionResult, detect } from "langdetect";
 
 export const CameraCapture: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -14,11 +14,10 @@ export const CameraCapture: React.FC = () => {
   const [extractedText, setExtractedText] = useState<string | null>(null);
   const { setShowNav } = useAppStore() as AppStore;
   const [facingMode, setFacingMode] = useState("user"); // 'user' for front camera, 'environment' for rear camera
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState<LanguageDetectionResult[]>([]);
 
   const detectLanguage = () => {
-    const langCode = franc(extractedText ?? "");
-    setLanguage(langCode);
+    setLanguage(detect(extractedText ?? "") ?? "");
   };
 
   useEffect(() => {
@@ -146,7 +145,9 @@ export const CameraCapture: React.FC = () => {
       {extractedText && (
         <div className="flex justify-center gap-3 items-center">
           <h2 className="font-semibold">Detected Language:</h2>
-          <p className="border rounded-lg my-2 px-3 py-2">{language}</p>
+          <p className="border rounded-lg my-2 px-3 py-2">
+            {JSON.stringify(language)}
+          </p>
         </div>
       )}
     </div>
