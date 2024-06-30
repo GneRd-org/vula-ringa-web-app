@@ -5,6 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import { BsTranslate } from "react-icons/bs";
 import { PiTranslateBold } from "react-icons/pi";
 import { CiSettings } from "react-icons/ci";
+import { FaSearch } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
 
 export const Footer = () => {
   const { pathname, hash } = useLocation();
@@ -31,11 +33,13 @@ export const Footer = () => {
           className="p-2 flex items-center flex-col gap-1"
         >
           {isActive(ROUTES.detect) ? (
-            <IoHome size={25} />
+            <FaSearch size={25} />
           ) : (
-            <IoHomeOutline size={25} />
+            <CiSearch size={25} />
           )}
-          <p className={`${active(ROUTES.home)} text-xs text-center"`}>Home</p>
+          <p className={`${active(ROUTES.detect)} text-xs text-center"`}>
+            Detect
+          </p>
         </Link>
         <Link
           to={ROUTES.translate}
