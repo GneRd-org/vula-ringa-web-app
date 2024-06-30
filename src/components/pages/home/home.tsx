@@ -44,13 +44,13 @@ export const Home = () => {
             <section className="flex py-5 gap-2 justify-evenly items-center w-full px-3">
               <Link to="/detect">
                 <button className="rounded-lg bg-lightPurple w-24 h-24 flex justify-center items-center">
-                  <BsTranslate size={40} />
+                  <FaSearch size={40} />
                 </button>
                 <p className="text-xs text-center"> Detect Lang. </p>
               </Link>
               <Link to="/translate">
                 <button className="rounded-lg bg-lightGreen w-24 h-24 flex justify-center items-center">
-                  <FaSearch size={40} />
+                  <BsTranslate size={40} />
                 </button>
                 <p className="text-xs text-center"> Translate </p>
               </Link>

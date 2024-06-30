@@ -27,6 +27,17 @@ export const Footer = () => {
           <p className={`${active(ROUTES.home)} text-xs text-center"`}>Home</p>
         </Link>
         <Link
+          to={ROUTES.detect}
+          className="p-2 flex items-center flex-col gap-1"
+        >
+          {isActive(ROUTES.detect) ? (
+            <IoHome size={25} />
+          ) : (
+            <IoHomeOutline size={25} />
+          )}
+          <p className={`${active(ROUTES.home)} text-xs text-center"`}>Home</p>
+        </Link>
+        <Link
           to={ROUTES.translate}
           className="p-2 flex items-center flex-col gap-1"
         >

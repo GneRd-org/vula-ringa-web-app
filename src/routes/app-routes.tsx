@@ -17,6 +17,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<AppLayout children={<Home />} />}>
           <Route path="home" element={<AppLayout children={<Home />} />} />
         </Route>
+        <Route path="/detect" element={<AppLayout children={<Detect />} />} />
         <Route
           path="/translate"
           element={<AppLayout children={<Translate />} />}
