@@ -1,6 +1,5 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { map } from "lodash";
-import { ReactElement, JSXElementConstructor, ReactNode, Key } from "react";
 
 export const Tabs = ({
   tabs,

@@ -39,6 +39,7 @@ export const VoiceRecorder: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(base64String);
     let amplitudeInterval: NodeJS.Timeout;
     if (isRecording) {
       amplitudeInterval = setInterval(() => {
@@ -68,12 +69,6 @@ export const VoiceRecorder: React.FC = () => {
           <audio src={audioUrl} controls />
         </div>
       )}
-      {/* {base64String && (
-        <div>
-          <h2>Base64 String</h2>
-          <textarea readOnly value={base64String} rows={10} cols={50} />
-        </div>x
-      )} */}
     </div>
   );
 };
