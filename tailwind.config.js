@@ -11,6 +11,7 @@ export default {
         lightPink: "#F5D2D4",
         lightPurple: "#E0CEF9",
         lightGreen: "#BEE8DA",
+        darkGreen: "#1E3932",
       },
     },
   },

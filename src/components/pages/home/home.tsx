@@ -27,7 +27,7 @@ export const Home = () => {
       {started ? (
         <section className="w-full flex items-center">
           <section className="w-full flex flex-col gap-4">
-            <section className="bg-primary h-58 px-3 py-5 rounded-bl-3xl">
+            <section className="bg-primary h-58 px-3 py-5 rounded-b-3xl">
               <h1 className="text-5xl font-extrabold text-center text-white">
                 Vula Ringa
               </h1>
