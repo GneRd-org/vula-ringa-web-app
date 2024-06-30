@@ -6,6 +6,7 @@ import { isEmpty } from "lodash";
 import { Typewriter, VoiceRecorder } from "../../common";
 import { FaRegCopy } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 export const Translate = () => {
   const [translatedText, setTranslatedText] = useState("");
@@ -36,7 +37,7 @@ export const Translate = () => {
               Translate
             </h1>
             <section className="flex items-center justify-around w-full">
-              <p className="py-10 text-xs text-black font-bold w-2/3">
+              <p className="py-10 text-xs text-black font-bold ">
                 Your friend in a foreign land. Let us translate from{" "}
                 <span className="text-primary font-extrabold">{fromLang}</span>{" "}
                 to <span className="text-primary font-extrabold">{toLang}</span>
@@ -93,6 +94,14 @@ export const Translate = () => {
                     <p className="text-primary text-xs">Copied to clipboard</p>
                   )}
                 </section>
+
+                <Link
+                  className="text-xs underline text-blue-500 hover:text-blue-400 cursor-pointer"
+                  to="https://giftsibusiso.github.io/pages/translate.html"
+                  target="_blank"
+                >
+                  Translate More Languages on our Website
+                </Link>
               </section>
             ),
           },

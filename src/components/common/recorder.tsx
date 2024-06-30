@@ -33,8 +33,8 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       const reader = new FileReader();
       reader.readAsDataURL(audioBlob);
       reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setBase64String(base64String.split(",")[1]); // Remove the data URL prefix
+        const _base64String = reader.result as string;
+        setBase64String(_base64String.split(",")[1]); // Remove the data URL prefix
       };
     };
     mediaRecorderRef.current.start();
@@ -57,6 +57,10 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     }
     return () => clearInterval(amplitudeInterval);
   }, [isRecording]);
+
+  const handleTranscribe = () => {
+    console.log("Transcribing...", base64String);
+  };
 
   return (
     <div className="flex justify-center flex-col gap-4 items-center">

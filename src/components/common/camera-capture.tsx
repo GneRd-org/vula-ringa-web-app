@@ -4,7 +4,7 @@ import { FaCamera } from "react-icons/fa6";
 import { TbCaptureFilled } from "react-icons/tb";
 import { FiCameraOff } from "react-icons/fi";
 import { AppStore, LangStore, useAppStore, useLangStore } from "../../store";
-import { FaCameraRotate } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 export const CameraCapture: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -12,9 +12,9 @@ export const CameraCapture: React.FC = () => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [extractedText, setExtractedText] = useState<string | null>(null);
   const { setShowNav } = useAppStore() as AppStore;
-  const [facingMode] = useState("user");
   const [language, setLanguage] = useState<string | null>(null);
   const { setFromLang } = useLangStore() as LangStore;
+  const navigate = useNavigate();
 
   const detectLanguage = () => {
     setLanguage("English");
@@ -135,7 +135,7 @@ export const CameraCapture: React.FC = () => {
               <button
                 onClick={() => {
                   setFromLang(language ?? "");
-                  window.location.href = "/translate";
+                  navigate("/translate");
                 }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
               >
@@ -144,7 +144,7 @@ export const CameraCapture: React.FC = () => {
               <button
                 onClick={() => {
                   setIsCameraOn(false);
-                  window.location.href = "/config";
+                  navigate("/config");
                 }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
               >
