@@ -16,7 +16,7 @@ export const Footer = () => {
   const isActive = (path: string) => hash === path || pathname === path;
 
   return (
-    <footer className="bottom-0 w-full sticky flex flex-col items-center md:hidden ">
+    <footer className="absolute bottom-0 w-full fixed flex flex-col items-center md:hidden ">
       <section className="flex items-center gap-2 bg-white drop-shadow-lg w-full justify-between px-5">
         <Link to={ROUTES.home} className="p-2 flex items-center flex-col gap-1">
           {isActive(ROUTES.home) ? (
