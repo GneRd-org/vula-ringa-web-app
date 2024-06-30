@@ -1,34 +1,7 @@
-const url = "https://vulavula-services.lelapa.ai/api/v1/translate/process";
-import axios from "axios";
-
-const mapLang = (lang: string) => {
-  const languages: { [key: string]: string } = {
-    "northern sotho": "nso_Latn",
-    afrikaans: "afr_Latn",
-    "southern sotho": "sot_Latn",
-    swati: "ssw_Latn",
-    tsonga: "tso_Latn",
-    tswana: "tsn_Latn",
-    xhosa: "xho_Latn",
-    isizulu: "zul_Latn",
-    english: "eng_Latn",
-    swahili: "swh_Latn",
-  };
-  return languages[lang.toLowerCase()];
-};
-
-const dto = (text: string, source: string, target: string) => {
-  return JSON.stringify({
-    input_text: text,
-    source_lang: mapLang(source),
-    target_lang: mapLang(target),
-  });
-};
-const modelTranslation = (data: any) => {
-  return {
-    translation: data.translation[0].translation_text,
-  };
-};
+const fileUploadURL =
+  "https://vulavula-services.lelapa.ai/api/v1/transport/file-upload";
+const processURL =
+  "https://vulavula-services.lelapa.ai/api/v1/transport/process";
 
 const processAudio = async (
   uploadId: string,
@@ -41,17 +14,14 @@ const processAudio = async (
   };
 
   try {
-    const response = await fetch(
-      "https://vulavula-services.lelapa.ai/api/v1/transport/process-audio",
-      {
-        method: "POST",
-        headers: {
-          "X-CLIENT-TOKEN": clientToken,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      }
-    );
+    const response = await fetch(processURL, {
+      method: "POST",
+      headers: {
+        "X-CLIENT-TOKEN": clientToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -78,9 +48,10 @@ const uploadFile = (audioChunks: BlobPart[]) => {
   fileReader.readAsArrayBuffer(file);
 
   fileReader.onload = async () => {
-    const arrayBuffer = fileReader.result;
+    const arrayBuffer = fileReader.result as ArrayBuffer;
+    
     const base64String = btoa(
-      String.fromCharCode(...new Uint8Array(arrayBuffer))
+      String.fromCharCode(...new Uint8Array(arrayBuffer ?? new ArrayBuffer(0)))
     );
 
     // Create the request body
@@ -92,20 +63,16 @@ const uploadFile = (audioChunks: BlobPart[]) => {
 
     // Set the headers
     const headers = {
-      "X-CLIENT-TOKEN":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1YjQ1MGY5MDcyOTRlM2ZhMzAyZDU0Nzg4NWNiYmEzIiwiY2xpZW50X2lkIjoyNywicmVxdWVzdHNfcGVyX21pbnV0ZSI6MCwibGFzdF9yZXF1ZXN0X3RpbWUiOm51bGx9.3xQ7MpYDtjvy7uJfIpYZ4mwI_OdVH2JTuX4OzqUmJyQ", // Replace with your actual client token
+      "X-CLIENT-TOKEN": import.meta.env.VITE_LELAPA_API_KEY,
       "Content-Type": "application/json",
     };
 
     try {
-      const response = await fetch(
-        "https://vulavula-services.lelapa.ai/api/v1/transport/file-upload",
-        {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(transportRequestBody),
-        }
-      );
+      const response = await fetch(fileUploadURL, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(transportRequestBody),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
