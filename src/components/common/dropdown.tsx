@@ -30,7 +30,7 @@ export type DropdownProps = {
 export const Dropdown: FC<DropdownProps> = ({ selection, onChange }) => {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<{ id: number; name: string } | null>(
-    null
+    languages.find((language) => language.name === selection) ?? null
   );
 
   const filteredData =
@@ -72,7 +72,7 @@ export const Dropdown: FC<DropdownProps> = ({ selection, onChange }) => {
               "w-full rounded-lg border bg-slate-300 py-1.5 pr-8 pl-3 text-sm/6 text-black",
               "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
             )}
-            displayValue={(value) => value?.name || ""}
+            displayValue={(value) => value?.name}
             onChange={(event) => setQuery(event.target.value)}
           />
           <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
