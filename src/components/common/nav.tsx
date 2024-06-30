@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { LogoIcon } from "../../assets";
+import { GnerdLogo } from "../../assets";
 
 export const Nav = () => {
   const { pathname, hash } = useLocation();
@@ -12,7 +12,7 @@ export const Nav = () => {
   return (
     <nav className="bg-white hidden md:flex items-center justify-between p-3 drop-shadow-md fixed w-full z-10">
       <Link to="/">
-        <img src={LogoIcon} className="w-20 hidden md:flex" alt="logo" />
+        <img src={GnerdLogo} className="w-20 hidden md:flex" alt="logo" />
       </Link>
       <ul className="hidden md:flex items-center justify-evenly gap-5">
         <Link className={`${active("#about-us")}`} to="#about-us">
