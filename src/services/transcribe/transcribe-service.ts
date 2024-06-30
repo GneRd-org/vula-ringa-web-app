@@ -34,66 +34,46 @@ const processAudio = async (
   }
 };
 
-const uploadFile = (audioChunks: BlobPart[]) => {
-  const file = new File(audioChunks, "audio.wav", {
+const uploadFile = async (base64String: string) => {
+  const file = new File([base64String], "audio.wav", {
     type: "audio/wav",
   });
 
-  if (!file) {
-    alert("Please select a file");
-    return;
-  }
+  // Create the request body
+  const transportRequestBody = {
+    file_name: file.name,
+    audio_blob: base64String,
+    file_size: file.size,
+  };
 
-  const fileReader = new FileReader();
-  fileReader.readAsArrayBuffer(file);
+  // Set the headers
+  const headers = {
+    "X-CLIENT-TOKEN": import.meta.env.VITE_LELAPA_API_KEY,
+    "Content-Type": "application/json",
+  };
 
-  fileReader.onload = async () => {
-    const arrayBuffer = fileReader.result as ArrayBuffer;
+  try {
+    const response = await fetch(fileUploadURL, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(transportRequestBody),
+    });
 
-    const base64String = btoa(
-      String.fromCharCode(...new Uint8Array(arrayBuffer ?? new ArrayBuffer(0)))
-    );
-
-    // Create the request body
-    const transportRequestBody = {
-      file_name: file.name,
-      audio_blob: base64String,
-      file_size: file.size,
-    };
-
-    // Set the headers
-    const headers = {
-      "X-CLIENT-TOKEN": import.meta.env.VITE_LELAPA_API_KEY,
-      "Content-Type": "application/json",
-    };
-
-    try {
-      const response = await fetch(fileUploadURL, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(transportRequestBody),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const { upload_id } = data;
-      processAudio(
-        upload_id,
-        headers["X-CLIENT-TOKEN"],
-        "https://webhook.site/85a1d3f6-e293-4fd7-bb11-793f44d3008e"
-      );
-      // read webhook response
-    } catch (error) {
-      console.error("Error uploading file:", error);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  };
 
-  fileReader.onerror = (error) => {
-    console.error("Error reading file:", error);
-  };
+    const data = await response.json();
+    const { upload_id } = data;
+    processAudio(
+      upload_id,
+      headers["X-CLIENT-TOKEN"],
+      "https://webhook.site/85a1d3f6-e293-4fd7-bb11-793f44d3008e"
+    );
+    // read webhook response
+  } catch (error) {
+    console.error("Error uploading file:", error);
+  }
 };
 
 export { processAudio, uploadFile };

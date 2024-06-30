@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { FaStopCircle } from "react-icons/fa";
 import { IoMicCircle } from "react-icons/io5";
 import { SoundWave } from "./sound-wave";
+import { uploadFile } from "../../services";
+import { useLangStore, LangStore } from "../../store";
 
 export interface VoiceRecorderProps {
   transcribe: boolean;
@@ -18,6 +20,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   const [amplitude, setAmplitude] = useState(10);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const { fromLang, toLang } = useLangStore() as LangStore;
 
   const handleStartRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -59,7 +62,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   }, [isRecording]);
 
   const handleTranscribe = () => {
-    console.log("Transcribing...", base64String);
+    if (base64String) {
+      uploadFile(base64String);
+    }
   };
 
   return (
@@ -87,7 +92,10 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         </div>
       )}
       {transcribe ? (
-        <button className="bg-primary text-white rounded-lg px-5 py-2 mt-5">
+        <button
+          onClick={handleTranscribe}
+          className="bg-primary text-white rounded-lg px-5 py-2 mt-5"
+        >
           Transcribe
         </button>
       ) : detect ? (

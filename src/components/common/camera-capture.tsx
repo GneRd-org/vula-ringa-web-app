@@ -21,7 +21,9 @@ export const CameraCapture: React.FC = () => {
   };
 
   useEffect(() => {
-    extractedText && detectLanguage();
+    setTimeout(() => {
+      if (extractedText) detectLanguage();
+    }, 2045);
   }, [extractedText]);
 
   const startCamera = async () => {
@@ -83,7 +85,10 @@ export const CameraCapture: React.FC = () => {
           ref={videoRef}
           width="80%%"
           height="200"
-          style={{ display: isCameraOn ? "block" : "none" }}
+          style={{
+            display: isCameraOn ? "block" : "none",
+            transform: isCameraOn ? "scaleX(-1)" : "none",
+          }}
         />
 
         <canvas
@@ -122,11 +127,19 @@ export const CameraCapture: React.FC = () => {
       {extractedText && (
         <>
           <div className="flex justify-center gap-3 items-center">
-            <h2 className="font-semibold">Detected Language:</h2>
-            <p className="border rounded-lg my-2 px-3 py-2">
-              {language ? language : "Detecting..."}
-            </p>
+            <h2 className="font-semibold">Detected Text:</h2>
+            <p className="border rounded-lg my-2 px-3 py-2">{extractedText}</p>
           </div>
+
+          {language && (
+            <div className="flex justify-center gap-3 items-center">
+              <h2 className="font-semibold">Detected Language:</h2>
+              <p className="border rounded-lg my-2 px-3 py-2">
+                {language ? language : "Detecting..."}
+              </p>
+            </div>
+          )}
+
           <section className="flex flex-col justify-center items-center">
             <h3 className="font-semibold">
               Set {language} as your source language?
@@ -135,6 +148,7 @@ export const CameraCapture: React.FC = () => {
               <button
                 onClick={() => {
                   setFromLang(language ?? "");
+                  setShowNav(true);
                   navigate("/translate");
                 }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
@@ -144,6 +158,7 @@ export const CameraCapture: React.FC = () => {
               <button
                 onClick={() => {
                   setIsCameraOn(false);
+                  setShowNav(true);
                   navigate("/config");
                 }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
