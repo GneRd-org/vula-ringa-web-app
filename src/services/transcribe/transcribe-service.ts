@@ -49,7 +49,7 @@ const uploadFile = (audioChunks: BlobPart[]) => {
 
   fileReader.onload = async () => {
     const arrayBuffer = fileReader.result as ArrayBuffer;
-    
+
     const base64String = btoa(
       String.fromCharCode(...new Uint8Array(arrayBuffer ?? new ArrayBuffer(0)))
     );
