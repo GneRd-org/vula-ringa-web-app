@@ -3,7 +3,7 @@ import Tesseract from "tesseract.js";
 import { FaCamera } from "react-icons/fa6";
 import { TbCaptureFilled } from "react-icons/tb";
 import { FiCameraOff } from "react-icons/fi";
-import { AppStore, useAppStore } from "../../store";
+import { AppStore, LangStore, useAppStore, useLangStore } from "../../store";
 import { FaCameraRotate } from "react-icons/fa6";
 
 export const CameraCapture: React.FC = () => {
@@ -14,6 +14,8 @@ export const CameraCapture: React.FC = () => {
   const { setShowNav } = useAppStore() as AppStore;
   const [facingMode, setFacingMode] = useState("user"); // 'user' for front camera, 'environment' for rear camera
   const [language, setLanguage] = useState<string | null>(null);
+  const { setFromLang } = useLangStore() as LangStore;
+
   const detectLanguage = () => {
     setLanguage("English");
   };
@@ -141,12 +143,30 @@ export const CameraCapture: React.FC = () => {
         </button>
       </div>
       {extractedText && (
-        <div className="flex justify-center gap-3 items-center">
-          <h2 className="font-semibold">Detected Language:</h2>
-          <p className="border rounded-lg my-2 px-3 py-2">
-            {language ? language : "Detecting..."}
-          </p>
-        </div>
+        <>
+          <div className="flex justify-center gap-3 items-center">
+            <h2 className="font-semibold">Detected Language:</h2>
+            <p className="border rounded-lg my-2 px-3 py-2">
+              {language ? language : "Detecting..."}
+            </p>
+          </div>
+          <section className="flex flex-col justify-center items-center">
+            <h3 className="font-semibold">
+              Set {language} as your source language?
+            </h3>
+            <section className="flex gap-3 items-center">
+              <button
+                onClick={() => setFromLang(language ?? "")}
+                className="bg-lightPurple text-white rounded-lg px-5 py-2"
+              >
+                Yes
+              </button>
+              <button className="bg-lightPurple text-white rounded-lg px-5 py-2">
+                No
+              </button>
+            </section>
+          </section>
+        </>
       )}
     </div>
   );
