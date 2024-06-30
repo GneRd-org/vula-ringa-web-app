@@ -41,7 +41,23 @@ export const Dropdown: FC<DropdownProps> = ({ selection, onChange }) => {
         });
 
   return (
-    <div className="mx-auto h-screen w-52 pt-20">
+    <div
+      className="
+        w-full
+        rounded-lg
+        border-none
+        bg-white/5
+        py-1.5
+        pr-8
+        pl-3
+        text-sm/6
+        text-black
+        focus:outline-none
+        data-[focus]:outline-2
+        data-[focus]:-outline-offset-2
+        data-[focus]:outline-white/25
+    "
+    >
       <Combobox
         value={selected}
         onChange={(value) => {
@@ -49,24 +65,22 @@ export const Dropdown: FC<DropdownProps> = ({ selection, onChange }) => {
           onChange(value?.name || "");
         }}
         onClose={() => setQuery("")}
-        __demoMode
       >
         <div className="relative">
           <ComboboxInput
             className={clsx(
-              "w-full rounded-lg border-none bg-white/5 py-1.5 pr-8 pl-3 text-sm/6 text-white",
+              "w-full rounded-lg border bg-slate-300 py-1.5 pr-8 pl-3 text-sm/6 text-black",
               "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
             )}
-            displayValue={({ name }) => name}
+            displayValue={(value) => value?.name || ""}
             onChange={(event) => setQuery(event.target.value)}
           />
           <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
-            <IoChevronDown className="size-4 fill-white/60 group-data-[hover]:fill-white" />
+            <IoChevronDown className="size-4 fill-slate-500 group-data-[hover]:fill-white" />
           </ComboboxButton>
         </div>
 
         <ComboboxOptions
-          anchor="bottom"
           transition
           className={clsx(
             "w-[var(--input-width)] rounded-xl border border-white/5 bg-white/5 p-1 [--anchor-gap:var(--spacing-1)] empty:invisible",
@@ -79,8 +93,8 @@ export const Dropdown: FC<DropdownProps> = ({ selection, onChange }) => {
               value={language}
               className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10"
             >
-              <FaCircleCheck className="invisible size-4 fill-white group-data-[selected]:visible" />
-              <div className="text-sm/6 text-white">{language?.name}</div>
+              <FaCircleCheck className="invisible size-4 fill-slate-500 group-data-[selected]:visible" />
+              <div className="text-xs/6 text-black">{language?.name}</div>
             </ComboboxOption>
           ))}
         </ComboboxOptions>
