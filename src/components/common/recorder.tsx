@@ -60,17 +60,23 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   }, [isRecording]);
 
   return (
-    <div className="flex justify-center flex-col items-center">
+    <div className="flex justify-center flex-col gap-4 items-center">
       <button
         onClick={isRecording ? handleStopRecording : handleStartRecording}
       >
         {isRecording ? (
-          <FaStopCircle className="text-red-300 text-8xl" />
+          <FaStopCircle
+            className={`${
+              isRecording ? "text-red-500" : "text-red-300"
+            } text-8xl`}
+          />
         ) : (
           <IoMicCircle className="text-red-300 text-8xl" />
         )}
       </button>
-      <SoundWave amplitude={amplitude} />
+      <section className="h-10">
+        <SoundWave amplitude={amplitude} />
+      </section>
       {audioUrl && (
         <div>
           <h2>Your Audio</h2>

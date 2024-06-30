@@ -10,9 +10,8 @@ export const Transcribe = () => {
               Transcribe
             </h1>
             <section className="flex items-center justify-around w-full">
-              <p className="py-10 text-xs text-black font-bold w-2/3">
-                Your friend in a foreign land, which helps you to communicate
-                with people who speak different languages.
+              <p className="py-10 text-xs text-black font-bold">
+                Let us transcribe your voice to text.
               </p>
             </section>
           </section>
