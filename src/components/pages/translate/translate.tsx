@@ -3,7 +3,7 @@ import { useState } from "react";
 import { translateText } from "../../../services";
 import { LangStore, useLangStore } from "../../../store";
 import { isEmpty } from "lodash";
-import { Typewriter } from "../../common";
+import { Typewriter, VoiceRecorder } from "../../common";
 import { FaRegCopy } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 
@@ -94,7 +94,7 @@ export const Translate = () => {
           },
           {
             title: "Audio",
-            content: <section>Audio</section>,
+            content: <VoiceRecorder />,
           },
         ]}
       />
