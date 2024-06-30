@@ -5,9 +5,13 @@ import { SoundWave } from "./sound-wave";
 
 export interface VoiceRecorderProps {
   transcribe: boolean;
+  detect?: boolean;
 }
 
-export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ transcribe }) => {
+export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
+  transcribe,
+  detect = false,
+}) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [base64String, setBase64String] = useState<string | null>(null);
@@ -76,6 +80,10 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ transcribe }) => {
       {transcribe ? (
         <button className="bg-primary text-white rounded-lg px-5 py-2 mt-5">
           Transcribe
+        </button>
+      ) : detect ? (
+        <button className="bg-primary text-white rounded-lg px-5 py-2 mt-5">
+          Detect
         </button>
       ) : (
         <button className="bg-primary text-white rounded-lg px-5 py-2 mt-5">
