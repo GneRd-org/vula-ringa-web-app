@@ -1,7 +1,9 @@
+import { VoiceRecorder } from "../../common";
+
 export const Transcribe = () => {
   return (
     <section className="h-full w-full flex flex-col gap-6">
-      <section id="about-us" className="w-full flex items-center">
+      <section className="w-full flex items-center">
         <section className="w-full flex flex-col gap-4">
           <section className="bg-lightPink h-58 px-3 py-5 rounded-bl-3xl">
             <h1 className="text-5xl font-extrabold text-center text-white">
@@ -16,6 +18,7 @@ export const Transcribe = () => {
           </section>
         </section>
       </section>
+      <VoiceRecorder />
     </section>
   );
 };
