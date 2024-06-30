@@ -9,3 +9,4 @@ export * from "./dropdown";
 export * from "./recorder";
 export * from "./sound-wave";
 export * from "./typewriter";
+export * from "./camera-capture";

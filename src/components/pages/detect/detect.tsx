@@ -1,4 +1,4 @@
-import { VoiceRecorder } from "../../common";
+import { CameraCapture, VoiceRecorder } from "../../common";
 
 export const Detect = () => {
   return (
@@ -17,7 +17,7 @@ export const Detect = () => {
           </section>
         </section>
       </section>
-      <VoiceRecorder detect transcribe={false} />
+      <CameraCapture />
     </section>
   );
 };
