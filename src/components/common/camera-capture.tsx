@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Tesseract from "tesseract.js";
 import { FaCamera } from "react-icons/fa6";
 import { TbCaptureFilled } from "react-icons/tb";
@@ -12,7 +12,7 @@ export const CameraCapture: React.FC = () => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [extractedText, setExtractedText] = useState<string | null>(null);
   const { setShowNav } = useAppStore() as AppStore;
-  const [facingMode, setFacingMode] = useState("user"); // 'user' for front camera, 'environment' for rear camera
+  const [facingMode] = useState("user");
   const [language, setLanguage] = useState<string | null>(null);
   const { setFromLang } = useLangStore() as LangStore;
 
@@ -65,12 +65,6 @@ export const CameraCapture: React.FC = () => {
         console.error(error);
       });
   };
-
-  const handleToggleCamera = useCallback(() => {
-    setFacingMode((prevMode) =>
-      prevMode === "environment" ? "user" : "environment"
-    );
-  }, []);
 
   const stopCamera = () => {
     if (videoRef.current && videoRef.current.srcObject) {
@@ -158,14 +152,17 @@ export const CameraCapture: React.FC = () => {
               <button
                 onClick={() => {
                   setFromLang(language ?? "");
-                  window.location.href = "/config";
+                  window.location.href = "/translate";
                 }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
               >
                 Yes
               </button>
               <button
-                onClick={() => setIsCameraOn(false)}
+                onClick={() => {
+                  setIsCameraOn(false);
+                  window.location.href = "/config";
+                }}
                 className="bg-lightPurple text-white rounded-lg px-5 py-2"
               >
                 No
