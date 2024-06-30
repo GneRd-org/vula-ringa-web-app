@@ -12,7 +12,7 @@ export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
       <section className="lg:px-16 w-full bg-gray-100 h-screen">
         {children}
       </section>
-      {(showNav || notHome) && <Footer />}
+      {showNav && notHome && <Footer />}
     </main>
   );
 };

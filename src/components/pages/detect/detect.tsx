@@ -5,7 +5,7 @@ export const Detect = () => {
     <section className="h-full w-full flex flex-col gap-6">
       <section className="w-full flex items-center">
         <section className="w-full flex flex-col gap-4">
-          <section className="bg-lightPurple h-58 px-3 py-5 rounded-bl-3xl">
+          <section className="bg-lightPurple h-58 px-3 py-5 rounded-b-3xl">
             <h1 className="text-5xl font-extrabold text-center text-white">
               Detect
             </h1>

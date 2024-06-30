@@ -7,9 +7,9 @@ import { FaSearch } from "react-icons/fa";
 import { AppStore, useAppStore } from "../../../store/app-store";
 
 export const Home = () => {
-  const { setShowNav } = useAppStore() as AppStore;
+  const { setShowNav, active, setActive } = useAppStore() as AppStore;
   const { hash } = useLocation();
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(active);
 
   useEffect(() => {
     if (!hash) return;
@@ -20,6 +20,7 @@ export const Home = () => {
   const getStarted = () => {
     setStarted(true);
     setShowNav(true);
+    setActive(true);
   };
 
   return (
