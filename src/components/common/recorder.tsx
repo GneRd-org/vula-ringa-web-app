@@ -1,11 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaStopCircle } from "react-icons/fa";
 import { IoMicCircle } from "react-icons/io5";
+import { motion } from "framer-motion";
+import { SoundWave } from "./sound-wave";
 
 export const VoiceRecorder: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [base64String, setBase64String] = useState<string | null>(null);
+  const [amplitude, setAmplitude] = useState(10);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
@@ -36,6 +39,18 @@ export const VoiceRecorder: React.FC = () => {
     setIsRecording(false);
   };
 
+  useEffect(() => {
+    let amplitudeInterval: NodeJS.Timeout;
+    if (isRecording) {
+      amplitudeInterval = setInterval(() => {
+        setAmplitude(Math.random() * 30 + 10);
+      }, 100);
+    } else {
+      setAmplitude(10);
+    }
+    return () => clearInterval(amplitudeInterval);
+  }, [isRecording]);
+
   return (
     <div className="flex justify-center flex-col items-center">
       <button
@@ -47,9 +62,10 @@ export const VoiceRecorder: React.FC = () => {
           <IoMicCircle className="text-red-300 text-8xl" />
         )}
       </button>
+      <SoundWave amplitude={amplitude} />
       {audioUrl && (
         <div>
-          <h2>Recorded Audio</h2>
+          <h2>Your Audio</h2>
           <audio src={audioUrl} controls />
         </div>
       )}

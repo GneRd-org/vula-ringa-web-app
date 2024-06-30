@@ -7,3 +7,4 @@ export * from "./footer";
 export * from "./toggle";
 export * from "./dropdown";
 export * from "./recorder";
+export * from "./sound-wave";
