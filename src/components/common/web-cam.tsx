@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import Webcam from "react-webcam";
 
-const WebcamComponent = () => {
+export const WebcamComponent = () => {
   const [facingMode, setFacingMode] = useState("user"); // 'user' for front camera, 'environment' for rear camera
 
   const videoConstraints = {
@@ -29,5 +29,3 @@ const WebcamComponent = () => {
     </div>
   );
 };
-
-export default WebcamComponent;

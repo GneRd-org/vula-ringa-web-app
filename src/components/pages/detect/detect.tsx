@@ -1,5 +1,4 @@
-import { CameraCapture } from "../../common";
-import WebcamComponent from "../../common/web-cam";
+import { WebcamComponent } from "../../common";
 
 export const Detect = () => {
   return (
