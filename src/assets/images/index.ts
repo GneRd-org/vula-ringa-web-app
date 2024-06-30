@@ -9,3 +9,4 @@ export { default as Galitos } from "./Galitos.png";
 export { default as EmbaMall } from "./mall@Emba.jpeg";
 export { default as HomeBg } from "./home-bg.svg";
 export { default as LelapaLogo } from "./lelapa-ai.png";
+export { default as GnerdLogo } from "./Gnerd_Logo.png";

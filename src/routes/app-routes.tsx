@@ -6,6 +6,8 @@ import {
   AuthLayout,
   Translate,
   Transcribe,
+  Detect,
+  Config,
 } from "../components";
 
 export const AppRoutes = () => {
@@ -23,6 +25,8 @@ export const AppRoutes = () => {
           path="/transcribe"
           element={<AppLayout children={<Transcribe />} />}
         />
+        <Route path="/detect" element={<AppLayout children={<Detect />} />} />
+        <Route path="/config" element={<AppLayout children={<Config />} />} />
         <Route path="/auth" element={<AuthLayout />} />
       </Routes>
     </BrowserRouter>
