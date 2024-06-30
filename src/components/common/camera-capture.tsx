@@ -1,16 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Tesseract from "tesseract.js";
 import { FaCamera } from "react-icons/fa6";
 import { TbCaptureFilled } from "react-icons/tb";
 import { FiCameraOff } from "react-icons/fi";
+import { AppStore, useAppStore } from "../../store";
+import Webcam from "react-webcam";
+import { FaCameraRotate } from "react-icons/fa6";
 
 export const CameraCapture: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [extractedText, setExtractedText] = useState<string | null>(null);
+  const { setShowNav } = useAppStore() as AppStore;
+  const [facingMode, setFacingMode] = useState("user"); // 'user' for front camera, 'environment' for rear camera
 
+  const videoConstraints = {
+    facingMode: facingMode,
+  };
   const startCamera = async () => {
+    setIsCameraOn(true);
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     if (videoRef.current) {
       videoRef.current.srcObject = stream;
@@ -18,6 +27,9 @@ export const CameraCapture: React.FC = () => {
       setIsCameraOn(true);
     }
   };
+  useEffect(() => {
+    isCameraOn ? setShowNav(false) : setShowNav(true);
+  }, [isCameraOn, setShowNav]);
 
   const captureImage = () => {
     if (videoRef.current && canvasRef.current) {
@@ -48,7 +60,12 @@ export const CameraCapture: React.FC = () => {
       });
   };
 
+  const handleToggleCamera = useCallback(() => {
+    setFacingMode((prevMode) => (prevMode === "user" ? "environment" : "user"));
+  }, []);
+
   const stopCamera = () => {
+    setIsCameraOn(false);
     if (videoRef.current && videoRef.current.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
       const tracks = stream.getTracks();
@@ -61,12 +78,16 @@ export const CameraCapture: React.FC = () => {
   return (
     <div>
       <div>
-        <video
-          ref={videoRef}
-          width="100%"
-          height="200"
-          style={{ display: isCameraOn ? "block" : "none" }}
-        />
+        {isCameraOn && (
+          <Webcam
+            mirrored={facingMode === "user"}
+            audio={false}
+            height={400}
+            screenshotFormat="image/jpeg"
+            width={400}
+            videoConstraints={videoConstraints}
+          />
+        )}
         <canvas
           ref={canvasRef}
           width="100%"
@@ -98,6 +119,23 @@ export const CameraCapture: React.FC = () => {
           disabled={!isCameraOn}
         >
           <FiCameraOff className="bg-lightPurple" /> Camera
+        </button>
+        <span className="px-2">{" | "}</span>
+        <button
+          className="flex gap-2 items-center font-semibold text-xs"
+          onClick={handleToggleCamera}
+        >
+          {facingMode === "user" ? (
+            <>
+              <FaCameraRotate className="bg-lightPurple" />
+              Rear Camera
+            </>
+          ) : (
+            <>
+              <FaCameraRotate className="bg-lightPurple" />
+              Front Camera
+            </>
+          )}
         </button>
       </div>
       {extractedText && (
