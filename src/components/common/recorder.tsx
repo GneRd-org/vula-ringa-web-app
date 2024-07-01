@@ -3,6 +3,7 @@ import { FaStopCircle } from "react-icons/fa";
 import { IoMicCircle } from "react-icons/io5";
 import { SoundWave } from "./sound-wave";
 import { uploadFile } from "../../services";
+import { AppStore, useAppStore } from "../../store";
 /* import { useLangStore, LangStore } from "../../store"; */
 
 export interface VoiceRecorderProps {
@@ -20,6 +21,9 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   const [amplitude, setAmplitude] = useState(10);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const [uploadId, setUploadId] = useState<string | null>(null);
+  const url = (id: string) =>
+    `https://vulavula-services.lelapa.ai/transcribe/${id}/get`;
   /* const { fromLang, toLang } = useLangStore() as LangStore; */
 
   const handleStartRecording = async () => {
@@ -67,6 +71,27 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
     }
   };
 
+  useEffect(() => {
+    console.log("Here");
+    if (uploadId) {
+      console.log("Have upload id, now");
+      const interval = setInterval(() => {
+        fetch(url(uploadId), {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CLIENT-TOKEN": import.meta.env.VITE_LELAPA_API_KEY,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            clearInterval(interval);
+          });
+      }, 5000);
+    }
+  }, [uploadId]);
+
   return (
     <div className="flex justify-center flex-col gap-4 items-center">
       <button
@@ -93,6 +118,7 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       )}
       {transcribe ? (
         <button
+          disabled={!base64String}
           onClick={handleTranscribe}
           className="bg-primary text-white rounded-lg px-5 py-2 mt-5"
         >

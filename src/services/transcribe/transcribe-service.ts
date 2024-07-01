@@ -1,8 +1,7 @@
 const fileUploadURL =
   "https://vulavula-services.lelapa.ai/api/v1/transport/file-upload";
-const processURL =
-  "https://vulavula-services.lelapa.ai/api/v1/transport/process";
-
+const processURL = (id: string) =>
+  `https://vulavula-services.lelapa.ai/api/v1/transcribe/process/${id}`;
 const processAudio = async (
   uploadId: string,
   clientToken: string,
@@ -13,8 +12,11 @@ const processAudio = async (
     webhook_url: webhookUrl,
   };
 
+  //save on local storage
+  localStorage.setItem("upload_id", uploadId);
+
   try {
-    const response = await fetch(processURL, {
+    const response = await fetch(processURL(uploadId), {
       method: "POST",
       headers: {
         "X-CLIENT-TOKEN": clientToken,
